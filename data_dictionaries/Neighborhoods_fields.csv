@@ -1,0 +1,12 @@
+friendlier_id,field_name,field_type,values,definition,definition_source
+Neighborhoods.shp,FID,int64,,,
+Neighborhoods.shp,INT_REFNO,int64,,,
+Neighborhoods.shp,PREFIX,object,,,
+Neighborhoods.shp,UDI,object,,,
+Neighborhoods.shp,SYMBOL_NAM,object,,,
+Neighborhoods.shp,BDNAME,object,,,
+Neighborhoods.shp,BDNUM,object,,,
+Neighborhoods.shp,TEXT_NBR,object,,,
+Neighborhoods.shp,SHAPE_AREA,int64,,,
+Neighborhoods.shp,SHAPE_LEN,int64,,,
+Neighborhoods.shp,geometry,geometry,,,

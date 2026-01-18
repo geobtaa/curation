@@ -1,0 +1,5 @@
+friendlier_id,field_name,field_type,values,definition,definition_source
+MPLS_CITY_LIMITS.shp,NAME,object,,,
+MPLS_CITY_LIMITS.shp,SHAPE_AREA,float64,,,
+MPLS_CITY_LIMITS.shp,SHAPE_LEN,float64,,,
+MPLS_CITY_LIMITS.shp,geometry,geometry,,,

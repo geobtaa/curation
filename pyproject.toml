@@ -1,0 +1,18 @@
+[project]
+name = "curation"
+version = "0.1.0"
+description = "Curation data pipeline"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "geopandas",
+  "matplotlib",
+  "pandas",
+  "rasterio",
+  "shapely",
+  "tqdm",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

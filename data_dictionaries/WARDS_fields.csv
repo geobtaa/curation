@@ -1,0 +1,5 @@
+friendlier_id,field_name,field_type,values,definition,definition_source
+WARDS.shp,BDNUM,object,,,
+WARDS.shp,SHAPE_AREA,float64,,,
+WARDS.shp,SHAPE_LEN,float64,,,
+WARDS.shp,geometry,geometry,,,
