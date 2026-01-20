@@ -1,7 +1,0 @@
-friendlier_id,field_name,field_type,values,definition,definition_source
-Planning_Secondary_Zoning.shp,OBJECTID,int64,,,
-Planning_Secondary_Zoning.shp,ZONE_CODE,object,,,
-Planning_Secondary_Zoning.shp,GlobalID,object,,,
-Planning_Secondary_Zoning.shp,Shape__Are,float64,,,
-Planning_Secondary_Zoning.shp,Shape__Len,float64,,,
-Planning_Secondary_Zoning.shp,geometry,geometry,,,

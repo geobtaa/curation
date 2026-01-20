@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import os
+import shutil
 import subprocess
 
-INPUT_DIR = "columbus"
+INPUT_DIR = "geopackages"
 OUTPUT_DIR = "pmtiles"
 MIN_ZOOM = 5
 MAX_ZOOM = 12
@@ -21,9 +22,15 @@ def convert_geopackage_to_pmtiles(
 ) -> None:
     """Convert a GeoPackage to PMTiles with ogr2ogr."""
     try:
+        ogr2ogr = shutil.which("ogr2ogr")
+        if not ogr2ogr:
+            raise FileNotFoundError(
+                "ogr2ogr not found in PATH. Install GDAL (e.g. `brew install gdal`) "
+                "or ensure ogr2ogr is on your PATH."
+            )
         subprocess.run(
             [
-                "ogr2ogr",
+                ogr2ogr,
                 "-t_srs",
                 target_srs,
                 "-dsco",
@@ -38,6 +45,8 @@ def convert_geopackage_to_pmtiles(
             check=True,
         )
         print(f"PMTiles created at {pmtiles_path}")
+    except FileNotFoundError as exc:
+        print(f"Missing dependency while processing {geopackage_path}: {exc}")
     except subprocess.CalledProcessError as exc:
         print(f"Error processing {geopackage_path}: {exc}")
 

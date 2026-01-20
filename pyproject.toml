@@ -5,6 +5,7 @@ description = "Curation data pipeline"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+  "fiona",
   "geopandas",
   "matplotlib",
   "pandas",

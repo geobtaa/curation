@@ -1,6 +1,0 @@
-friendlier_id,field_name,field_type,values,definition,definition_source
-COMMUNITIES.shp,BDNAME,object,,,
-COMMUNITIES.shp,BDNUM,object,,,
-COMMUNITIES.shp,SHAPE_AREA,float64,,,
-COMMUNITIES.shp,SHAPE_LEN,float64,,,
-COMMUNITIES.shp,geometry,geometry,,,

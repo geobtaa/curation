@@ -1,5 +1,0 @@
-friendlier_id,field_name,field_type,values,definition,definition_source
-2ft_contour.shp,ID,int64,,,
-2ft_contour.shp,CONTOUR,int64,,,
-2ft_contour.shp,SHAPE_LEN,float64,,,
-2ft_contour.shp,geometry,geometry,,,
