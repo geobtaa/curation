@@ -6,7 +6,7 @@ import os
 import shutil
 import subprocess
 
-INPUT_DIR = "geopackages"
+INPUT_DIR = "gpkg"
 OUTPUT_DIR = "pmtiles"
 MIN_ZOOM = 5
 MAX_ZOOM = 12

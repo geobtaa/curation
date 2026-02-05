@@ -24,7 +24,7 @@ OUTPUT_COLUMNS = [
     "position",
 ]
 
-INPUT_DIR = "geopackages"
+INPUT_DIR = "temp"
 OUTPUT_DIR = "data_dictionaries"
 
 

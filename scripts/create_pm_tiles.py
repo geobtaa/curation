@@ -89,7 +89,7 @@ def create_pmtiles_for_directory(
 
 
 def main() -> None:
-    shapefile_directory = "columbus"
+    shapefile_directory = "gpkg"
     pmtiles_directory = "pmtiles"
     create_pmtiles_for_directory(shapefile_directory, pmtiles_directory)
 
