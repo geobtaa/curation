@@ -15,6 +15,15 @@ import re
 import sys
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
+# ---- User config (optional) ----
+# If you leave CLI args blank, these defaults are used.
+DEFAULT_GDB_PATH = "BTAA_GIN_Baltimore_City_base_layers.gdb"
+DEFAULT_OUTPUT_DIR = "output"
+DEFAULT_RUN_INVENTORY_CSV = True
+DEFAULT_RUN_FIELDS_CSV = True
+DEFAULT_ID_PREFIX = "b1g_"
+# --------------------------------
+
 
 def _field_def_to_dict(field_def) -> Dict[str, Any]:
     field_info = {
@@ -93,7 +102,15 @@ def _first_text(element) -> Optional[str]:
     if element is None:
         return None
     text = (element.text or "").strip()
-    return text or None
+    return _strip_html(text) or None
+
+
+def _strip_html(text: str) -> str:
+    if not text:
+        return text
+    text = re.sub(r"<[^>]+>", "", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
 
 
 def _xml_attribute_map(xml_texts: Iterable[str]) -> Dict[str, Dict[str, Dict[str, str]]]:
@@ -140,6 +157,163 @@ def _xml_attribute_map(xml_texts: Iterable[str]) -> Dict[str, Dict[str, Dict[str
                             existing[key] = value
 
     return layer_map
+
+
+def _xml_layer_descriptions(xml_texts: Iterable[str]) -> Dict[str, str]:
+    from xml.etree import ElementTree as ET
+
+    layer_descriptions: Dict[str, str] = {}
+
+    for xml_text in xml_texts:
+        try:
+            root = ET.fromstring(xml_text)
+        except ET.ParseError:
+            continue
+
+        layer_name = None
+        detailed = root.find(".//detailed")
+        if detailed is not None:
+            layer_name = detailed.get("Name") or _first_text(detailed.find("./enttyp/enttypl"))
+
+        if not layer_name:
+            layer_name = _first_text(root.find(".//dataIdInfo/idCitation/resTitle"))
+        if not layer_name:
+            layer_name = _first_text(root.find(".//idinfo/citation/citeinfo/title"))
+
+        if not layer_name:
+            continue
+
+        description = (
+            _first_text(root.find(".//dataIdInfo/idAbs"))
+            or _first_text(root.find(".//idinfo/descript/abstract"))
+            or _first_text(root.find(".//idinfo/descript/purpose"))
+        )
+
+        if description and layer_name not in layer_descriptions:
+            layer_descriptions[layer_name] = description
+
+    return layer_descriptions
+
+
+def _xml_layer_rights(xml_texts: Iterable[str]) -> Dict[str, str]:
+    from xml.etree import ElementTree as ET
+
+    layer_rights: Dict[str, str] = {}
+
+    for xml_text in xml_texts:
+        try:
+            root = ET.fromstring(xml_text)
+        except ET.ParseError:
+            continue
+
+        layer_name = None
+        detailed = root.find(".//detailed")
+        if detailed is not None:
+            layer_name = detailed.get("Name") or _first_text(detailed.find("./enttyp/enttypl"))
+
+        if not layer_name:
+            layer_name = _first_text(root.find(".//dataIdInfo/idCitation/resTitle"))
+        if not layer_name:
+            layer_name = _first_text(root.find(".//idinfo/citation/citeinfo/title"))
+
+        if not layer_name:
+            continue
+
+        rights_values: List[str] = []
+
+        # FGDC-style
+        for path in [
+            ".//idinfo/accconst",
+            ".//idinfo/useconst",
+            ".//idinfo/secinfo/secclass",
+        ]:
+            value = _first_text(root.find(path))
+            if value:
+                rights_values.append(value)
+
+        # ISO-style
+        for path in [
+            ".//dataIdInfo/resConst/Consts/useLimitation",
+            ".//dataIdInfo/resConst/Consts/otherConstraints",
+            ".//dataIdInfo/resConst/Consts/accessConstraints",
+            ".//dataIdInfo/resConst/Consts/useConstraints",
+        ]:
+            value = _first_text(root.find(path))
+            if value:
+                rights_values.append(value)
+
+        if rights_values:
+            uniq = []
+            for item in rights_values:
+                if item not in uniq:
+                    uniq.append(item)
+            layer_rights[layer_name] = " | ".join(uniq)
+
+    return layer_rights
+
+
+def _xml_layer_themes(xml_texts: Iterable[str]) -> Dict[str, str]:
+    from xml.etree import ElementTree as ET
+
+    layer_themes: Dict[str, str] = {}
+
+    for xml_text in xml_texts:
+        try:
+            root = ET.fromstring(xml_text)
+        except ET.ParseError:
+            continue
+
+        layer_name = None
+        detailed = root.find(".//detailed")
+        if detailed is not None:
+            layer_name = detailed.get("Name") or _first_text(detailed.find("./enttyp/enttypl"))
+
+        if not layer_name:
+            layer_name = _first_text(root.find(".//dataIdInfo/idCitation/resTitle"))
+        if not layer_name:
+            layer_name = _first_text(root.find(".//idinfo/citation/citeinfo/title"))
+
+        if not layer_name:
+            continue
+
+        topics: List[str] = []
+        for node in root.findall(".//dataIdInfo/tpCat"):
+            value = _first_text(node)
+            if value:
+                topics.append(value)
+        for node in root.findall(".//idinfo/keywords/theme/themekey"):
+            value = _first_text(node)
+            if value and value.lower() in (
+                "farming",
+                "biota",
+                "boundaries",
+                "climatology/meteorology/atmosphere",
+                "economy",
+                "elevation",
+                "environment",
+                "geoscientificinformation",
+                "health",
+                "imagerybasemapsearthcover",
+                "intelligencemilitary",
+                "inlandwaters",
+                "location",
+                "oceans",
+                "planningcadastre",
+                "society",
+                "structure",
+                "transportation",
+                "utilitiescommunication",
+            ):
+                topics.append(value)
+
+        if topics:
+            uniq = []
+            for item in topics:
+                if item not in uniq:
+                    uniq.append(item)
+            layer_themes[layer_name] = " | ".join(uniq)
+
+    return layer_themes
 
 
 def _srs_to_dict(srs) -> Optional[Dict[str, Any]]:
@@ -200,6 +374,7 @@ def _layer_to_dict(layer) -> Dict[str, Any]:
     fields = [_field_def_to_dict(layer_def.GetFieldDefn(i)) for i in range(layer_def.GetFieldCount())]
 
     layer_info = {
+        "id": _generate_layer_id(prefix=DEFAULT_ID_PREFIX),
         "name": layer.GetName(),
         "geometry_type": layer_def.GetGeomType(),
         "geometry_type_name": _geom_type_name(layer_def),
@@ -348,6 +523,18 @@ def _sanitize_filename(name: str) -> str:
     return "".join(ch if ch.isalnum() or ch in ("-", "_", ".") else "_" for ch in safe)
 
 
+def _generate_layer_id(length: int = 12, prefix: str = "") -> str:
+    alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    try:
+        from nanoid import generate  # type: ignore
+
+        return f"{prefix}{generate(alphabet, length)}"
+    except Exception:
+        import secrets
+
+        return f"{prefix}{''.join(secrets.choice(alphabet) for _ in range(length))}"
+
+
 def _resource_type(geom_name: Optional[str]) -> str:
     if not geom_name:
         return "Unknown"
@@ -359,7 +546,11 @@ def _resource_type(geom_name: Optional[str]) -> str:
 
 def _write_layer_csv(path: str, inventory: List[Dict[str, Any]]) -> None:
     fieldnames = [
+        "ID",
         "name",
+        "Description",
+        "Rights",
+        "Theme",
         "geometry_type",
         "geometry_type_name",
         "Resource Type",
@@ -373,7 +564,11 @@ def _write_layer_csv(path: str, inventory: List[Dict[str, Any]]) -> None:
         for item in inventory:
             writer.writerow(
                 {
+                    "ID": item.get("id"),
                     "name": item.get("name"),
+                    "Description": item.get("description"),
+                    "Rights": item.get("rights"),
+                    "Theme": item.get("theme"),
                     "geometry_type": item.get("geometry_type"),
                     "geometry_type_name": item.get("geometry_type_name"),
                     "Resource Type": _resource_type(item.get("geometry_type_name")),
@@ -387,39 +582,55 @@ def _write_layer_csv(path: str, inventory: List[Dict[str, Any]]) -> None:
 def _write_field_csvs(directory: str, inventory: List[Dict[str, Any]]) -> None:
     os.makedirs(directory, exist_ok=True)
     fieldnames = [
+        "friendlier_id",
         "field_name",
         "field_type",
-        "width",
-        "precision",
-        "nullable",
-        "default",
-        "domain",
-        "alias",
+        # "width",
+        # "precision",
+        # "nullable",
+        # "default",
+        "values",
+        # "alias",
         "definition",
         "definition_source",
         "domain_description",
+        "parent_field_name",
+        "position"
     ]
     for item in inventory:
         layer_name = item.get("name") or "layer"
+        layer_id = item.get("id") or ""
         filename = _sanitize_filename(layer_name) + ".csv"
         path = os.path.join(directory, filename)
         with open(path, "w", encoding="utf-8", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             for field in item.get("fields") or []:
+                alias = field.get("alias") or ""
+                field_name = field.get("name") or ""
+                if alias and field_name and alias == field_name:
+                    alias = ""
+                definition = field.get("description") or ""
+                if alias and definition:
+                    definition = f"{alias}. {definition}"
+                elif alias and not definition:
+                    definition = alias
                 writer.writerow(
                     {
+                        "friendlier_id": layer_id,
                         "field_name": field.get("name"),
                         "field_type": field.get("type"),
-                        "definition": field.get("description"),
+                        "definition": definition,
                         "definition_source": field.get("definition_source"),
-                        "width": field.get("width"),
-                        "precision": field.get("precision"),
-                        "nullable": field.get("nullable"),
-                        "default": field.get("default"),
-                        "domain": field.get("domain"),
-                        "alias": field.get("alias"),
+                        # "width": field.get("width"),
+                        # "precision": field.get("precision"),
+                        # "nullable": field.get("nullable"),
+                        # "default": field.get("default"),
+                        "values": field.get("domain"),
+                        # "alias": field.get("alias"),
                         "domain_description": field.get("domain_description"),
+                        "parent_field_name": "",
+                        "position": "",
                     }
                 )
 
@@ -454,7 +665,8 @@ def _print_table(inventory: List[Dict[str, Any]]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Inventory feature classes in a File Geodatabase.")
-    parser.add_argument("gdb", help="Path to .gdb directory")
+    parser.add_argument("gdb", nargs="?", help="Path to .gdb directory")
+    parser.add_argument("--out-dir", dest="out_dir", help="Output directory for CSVs/JSON")
     parser.add_argument("--json", dest="json_path", help="Write full inventory to JSON file")
     parser.add_argument("--csv", dest="csv_path", help="Write layer inventory to CSV file")
     parser.add_argument(
@@ -462,10 +674,34 @@ def main() -> int:
         dest="fields_dir",
         help="Write one CSV per layer for field definitions",
     )
+    parser.add_argument(
+        "--no-inventory",
+        action="store_true",
+        help="Disable writing the layer inventory CSV",
+    )
+    parser.add_argument(
+        "--no-fields",
+        action="store_true",
+        help="Disable writing per-layer field CSVs",
+    )
     args = parser.parse_args()
 
-    ds = _open_gdb(args.gdb)
-    xml_map = _xml_attribute_map(_extract_metadata_xml_from_gdb(args.gdb))
+    gdb_path = args.gdb or DEFAULT_GDB_PATH
+    if not gdb_path:
+        raise SystemExit("No geodatabase path provided. Set DEFAULT_GDB_PATH or pass as an argument.")
+
+    out_dir = args.out_dir or DEFAULT_OUTPUT_DIR
+    os.makedirs(out_dir, exist_ok=True)
+
+    run_inventory = DEFAULT_RUN_INVENTORY_CSV if not args.no_inventory else False
+    run_fields = DEFAULT_RUN_FIELDS_CSV if not args.no_fields else False
+
+    ds = _open_gdb(gdb_path)
+    xml_texts = _extract_metadata_xml_from_gdb(gdb_path)
+    xml_map = _xml_attribute_map(xml_texts)
+    xml_layer_desc = _xml_layer_descriptions(xml_texts)
+    xml_layer_rights = _xml_layer_rights(xml_texts)
+    xml_layer_themes = _xml_layer_themes(xml_texts)
 
     inventory: List[Dict[str, Any]] = []
     for i in range(ds.GetLayerCount()):
@@ -481,6 +717,31 @@ def main() -> int:
                 if key.endswith(f".{layer_name}") or layer_name.endswith(f".{key}"):
                     layer_meta = value
                     break
+        layer_desc = xml_layer_desc.get(layer_name)
+        if layer_desc is None and layer_name:
+            for key, value in xml_layer_desc.items():
+                if key.endswith(f".{layer_name}") or layer_name.endswith(f".{key}"):
+                    layer_desc = value
+                    break
+        layer_rights = xml_layer_rights.get(layer_name)
+        if layer_rights is None and layer_name:
+            for key, value in xml_layer_rights.items():
+                if key.endswith(f".{layer_name}") or layer_name.endswith(f".{key}"):
+                    layer_rights = value
+                    break
+        layer_theme = xml_layer_themes.get(layer_name)
+        if layer_theme is None and layer_name:
+            for key, value in xml_layer_themes.items():
+                if key.endswith(f".{layer_name}") or layer_name.endswith(f".{key}"):
+                    layer_theme = value
+                    break
+
+        if layer_desc:
+            layer_info["description"] = layer_desc
+        if layer_rights:
+            layer_info["rights"] = layer_rights
+        if layer_theme:
+            layer_info["theme"] = layer_theme
 
         if layer_meta:
             for field in layer_info.get("fields") or []:
@@ -502,11 +763,15 @@ def main() -> int:
 
     if args.csv_path:
         _write_layer_csv(args.csv_path, inventory)
+    elif run_inventory:
+        _write_layer_csv(os.path.join(out_dir, "layers.csv"), inventory)
 
     if args.fields_dir:
         _write_field_csvs(args.fields_dir, inventory)
+    elif run_fields:
+        _write_field_csvs(os.path.join(out_dir, "fields"), inventory)
 
-    if not args.json_path and not args.csv_path and not args.fields_dir:
+    if not args.json_path and not args.csv_path and not args.fields_dir and not run_inventory and not run_fields:
         _print_table(inventory)
 
     return 0
