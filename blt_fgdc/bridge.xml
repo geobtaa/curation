@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+<idinfo>
+<citation>
+<citeinfo>
+<title>bridge</title>
+<geoform>vector digital data</geoform>
+</citeinfo>
+</citation>
+<descript>
+<purpose>This data represents the locations of bridges across Baltimore City.</purpose>
+</descript>
+<keywords>
+<theme>
+<themekt>None</themekt>
+<themekey>Bridge</themekey>
+<themekey>Transportation</themekey>
+<themekey>DOT</themekey>
+</theme>
+</keywords>
+<accconst>None</accconst>
+<useconst>None</useconst>
+<datacred>City of Baltimore, Department of Transportation (DOT)</datacred>
+<native>Esri ArcGIS 13.5.2.57366</native>
+</idinfo>
+<spdoinfo>
+<direct>Vector</direct>
+<ptvctinf>
+<sdtsterm>
+<sdtstype>Entity point</sdtstype>
+<ptvctcnt>0</ptvctcnt>
+</sdtsterm>
+</ptvctinf>
+</spdoinfo>
+<eainfo>
+<detailed>
+<enttyp>
+<enttypl>bridge</enttypl>
+</enttyp>
+<attr>
+<attrlabl>OBJECTID</attrlabl>
+<attrdef>Internal feature number.</attrdef>
+<attrdefs>ESRI</attrdefs>
+<attrdomv>
+<udom>Sequential unique whole numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>Shape</attrlabl>
+<attrdef>Feature geometry.</attrdef>
+<attrdefs>ESRI</attrdefs>
+<attrdomv>
+<udom>Coordinates defining the features.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>BRDGNMBSR</attrlabl>
+<attrdef>Internal feature number.</attrdef>
+<attrdefs>ESRI</attrdefs>
+<attrdomv>
+<udom>Sequential unique whole numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>ObjectID</attrlabl>
+<attrdef>Internal feature number.</attrdef>
+<attrdefs>ESRI</attrdefs>
+<attrdomv>
+<udom>Sequential unique whole numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>QUALIFIER</attrlabl>
+</attr>
+<attr>
+<attrlabl>ADT</attrlabl>
+</attr>
+<attr>
+<attrlabl>ADT_YEAR</attrlabl>
+</attr>
+<attr>
+<attrlabl>BSR</attrlabl>
+</attr>
+<attr>
+<attrlabl>LOCATION</attrlabl>
+</attr>
+<attr>
+<attrlabl>FEDERAL_AID</attrlabl>
+</attr>
+<attr>
+<attrlabl>QUADRANT</attrlabl>
+</attr>
+<attr>
+<attrlabl>MAPGRID</attrlabl>
+</attr>
+<attr>
+<attrlabl>DESCRIPTION</attrlabl>
+</attr>
+<attr>
+<attrlabl>SPANS</attrlabl>
+</attr>
+<attr>
+<attrlabl>CONSULTANT</attrlabl>
+</attr>
+<attr>
+<attrlabl>INSP_START</attrlabl>
+</attr>
+<attr>
+<attrlabl>INSP_CMPLT</attrlabl>
+</attr>
+<attr>
+<attrlabl>UNDERWTR_CMPLT</attrlabl>
+</attr>
+<attr>
+<attrlabl>SIA_CMPLT</attrlabl>
+</attr>
+<attr>
+<attrlabl>RATING_ANLYS</attrlabl>
+</attr>
+<attr>
+<attrlabl>REPORT_STRTD</attrlabl>
+</attr>
+<attr>
+<attrlabl>REPRT_CMPLT</attrlabl>
+</attr>
+<attr>
+<attrlabl>SUBMIT_DTE</attrlabl>
+</attr>
+<attr>
+<attrlabl>POSTING</attrlabl>
+</attr>
+<attr>
+<attrlabl>MOVABLE</attrlabl>
+</attr>
+<attr>
+<attrlabl>RAILROAD</attrlabl>
+</attr>
+<attr>
+<attrlabl>NOTE_</attrlabl>
+</attr>
+<attr>
+<attrlabl>DIG_NOTE</attrlabl>
+</attr>
+<attr>
+<attrlabl>BSRLBL</attrlabl>
+</attr>
+<attr>
+<attrlabl>last_edited_date</attrlabl>
+</attr>
+<attr>
+<attrlabl>COUNTY</attrlabl>
+</attr>
+<attr>
+<attrlabl>created_user</attrlabl>
+</attr>
+<attr>
+<attrlabl>created_date</attrlabl>
+</attr>
+<attr>
+<attrlabl>last_edited_user</attrlabl>
+</attr>
+</detailed>
+<detailed>
+<enttyp>
+<enttypl>Anno_1_8</enttypl>
+</enttyp>
+</detailed>
+</eainfo>
+<distinfo>
+<distliab>See access and use constraints information.</distliab>
+<stdorder>
+<digform>
+<digtinfo>
+<formname>SDE Feature Class</formname>
+</digtinfo>
+<digtopt>
+<onlinopt>
+</onlinopt>
+</digtopt>
+</digform>
+</stdorder>
+</distinfo>
+<metainfo>
+<metd>20260121</metd>
+<metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+<metstdv>FGDC-STD-001-1998</metstdv>
+<mettc>local time</mettc>
+</metainfo>
+</metadata>

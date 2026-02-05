@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+<idinfo>
+<citation>
+<citeinfo>
+<title>Council_District</title>
+</citeinfo>
+</citation>
+<descript>
+<purpose>This dataset represents Baltimore City Council Districts. The boundaries were finalized in November 2023. The districts were derived from city voter precinct boundaries. Unadjusted population, race and ethnicity counts were derived from the 2020 Census counts.</purpose>
+</descript>
+<keywords>
+<theme>
+<themekt>None</themekt>
+<themekey>Council District</themekey>
+<themekey>Political</themekey>
+<themekey>Geographic</themekey>
+<themekey>City Government</themekey>
+<themekey>City Council</themekey>
+<themekey>Council</themekey>
+</theme>
+</keywords>
+<accconst>None</accconst>
+<useconst>None</useconst>
+<datacred>City of Baltimore</datacred>
+</idinfo>
+<metainfo>
+<metd>20260121</metd>
+<metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+<metstdv>FGDC-STD-001-1998</metstdv>
+<mettc>local time</mettc>
+</metainfo>
+</metadata>

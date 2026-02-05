@@ -1,0 +1,23 @@
+Attribute_Label,Attribute_Definition,Attribute_Definition_Source,Attribute_Domain
+OBJECTID,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+Shape,Feature geometry.,ESRI,Coordinates defining the features.
+SHAPE,Feature geometry.,ESRI,Coordinates defining the features.
+GIS_ID,A unique feature identifier used in the City of Baltimore's Enterprise Geographic Information System,EGIS,
+FTYPE,The type of feature,EGIS,
+AREA_NAME,Name of the area,EGIS,
+AREA_NMBR,,,
+AREA_ABBR,,,
+AREA_TYPE,"The type of area, zone, region, neighborhood, etc",EGIS,
+ACRE,,,
+CNTCT_NME,,,
+CNTCT_DPT,,,
+CNTCT_PHN,,,
+CNTCT_EML,,,
+CNTCT_ADDR,,,
+CNTCT_ADDR2,,,
+CNTCT_CITY,,,
+CNTCT_STATE,,,
+HALF,Length of feature in internal units.,ESRI,Positive real numbers that are automatically generated.
+SHAPE_Length,Length of feature in internal units.,Esri,Positive real numbers that are automatically generated.
+SHAPE_Area,Area of feature in internal units squared.,Esri,Positive real numbers that are automatically generated.
+CNTCT_ZIP,Area of feature in internal units squared.,ESRI,Positive real numbers that are automatically generated.

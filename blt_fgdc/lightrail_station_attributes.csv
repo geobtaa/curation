@@ -1,0 +1,13 @@
+Attribute_Label,Attribute_Definition,Attribute_Definition_Source,Attribute_Domain
+OBJECTID,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+Shape,Feature geometry.,ESRI,Coordinates defining the features.
+LRAILSTA_,,,
+LRAILSTA_I,,,
+NAME,Internal feature number.,Esri,Sequential unique whole numbers that are automatically generated.
+ObjectID,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+last_edited_date,,,
+MTA_BUSES,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+URL,,,
+created_user,,,
+created_date,,,
+last_edited_user,,,

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+<idinfo>
+<citation>
+<citeinfo>
+<title>Primary_SnowZones</title>
+<geoform>vector digital data</geoform>
+</citeinfo>
+</citation>
+<descript>
+<abstract>This file represents the primary snow removal zones for the City of Baltimore.</abstract>
+<purpose>To organize the City's snow emergency response program.</purpose>
+</descript>
+<keywords>
+<theme>
+<themekt>None</themekt>
+<themekey>Boundary</themekey>
+<themekey>Snow</themekey>
+<themekey>DOT</themekey>
+</theme>
+</keywords>
+<accconst>None</accconst>
+<useconst>None</useconst>
+<datacred>City of Baltimore, Department of Transportation (DOT)</datacred>
+<native>Esri ArcGIS 13.5.2.57366</native>
+</idinfo>
+<spdoinfo>
+<direct>Vector</direct>
+<ptvctinf>
+<sdtsterm>
+<sdtstype>GT-polygon composed of chains</sdtstype>
+<ptvctcnt>0</ptvctcnt>
+</sdtsterm>
+</ptvctinf>
+</spdoinfo>
+<eainfo>
+<detailed>
+<enttyp>
+<enttypl>Primary_SnowZones</enttypl>
+</enttyp>
+<attr>
+<attrlabl>Shape</attrlabl>
+<attrdef>Feature geometry.</attrdef>
+<attrdefs>ESRI</attrdefs>
+<attrdomv>
+<udom>Coordinates defining the features.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>ZONE_NO</attrlabl>
+</attr>
+<attr>
+<attrlabl>AREA_NO</attrlabl>
+</attr>
+<attr>
+<attrlabl>RTID</attrlabl>
+</attr>
+<attr>
+<attrlabl>YARD_ID</attrlabl>
+</attr>
+<attr>
+<attrlabl>INSP_LINKP</attrlabl>
+</attr>
+<attr>
+<attrlabl>INSP_LINKS</attrlabl>
+</attr>
+<attr>
+<attrlabl>OBJECTID</attrlabl>
+<attrdef>Internal feature number.</attrdef>
+<attrdefs>ESRI</attrdefs>
+<attrdomv>
+<udom>Sequential unique whole numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>Zone_</attrlabl>
+</attr>
+<attr>
+<attrlabl>AGENCY</attrlabl>
+</attr>
+<attr>
+<attrlabl>YARD_NAME</attrlabl>
+</attr>
+<attr>
+<attrlabl>Y_ADDRESS</attrlabl>
+</attr>
+<attr>
+<attrlabl>Y_PHONE</attrlabl>
+</attr>
+<attr>
+<attrlabl>GlobalID</attrlabl>
+</attr>
+<attr>
+<attrlabl>URL</attrlabl>
+</attr>
+<attr>
+<attrlabl>PASS</attrlabl>
+</attr>
+<attr>
+<attrlabl>Shape_Length</attrlabl>
+<attrdef>Length of feature in internal units.</attrdef>
+<attrdefs>Esri</attrdefs>
+<attrdomv>
+<udom>Positive real numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>Shape_Area</attrlabl>
+<attrdef>Area of feature in internal units squared.</attrdef>
+<attrdefs>Esri</attrdefs>
+<attrdomv>
+<udom>Positive real numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+</detailed>
+</eainfo>
+<distinfo>
+<distliab>See access and use constraints information.</distliab>
+<stdorder>
+<digform>
+<digtinfo>
+<formname>SDE Feature Class</formname>
+<transize>0.074</transize>
+</digtinfo>
+<digtopt>
+<onlinopt>
+</onlinopt>
+</digtopt>
+</digform>
+</stdorder>
+</distinfo>
+<metainfo>
+<metd>20260121</metd>
+<metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+<metstdv>FGDC-STD-001-1998</metstdv>
+<mettc>local time</mettc>
+</metainfo>
+</metadata>

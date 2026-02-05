@@ -1,0 +1,12 @@
+Attribute_Label,Attribute_Definition,Attribute_Definition_Source,Attribute_Domain
+OBJECTID,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+Id,,,
+location,,,
+vehicles,,,
+date_added,,,
+URL,,,
+Shape,Feature geometry.,ESRI,Coordinates defining the features.
+created_user,,,
+created_date,,,
+last_edited_user,,,
+last_edited_date,,,

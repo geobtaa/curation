@@ -1,0 +1,15 @@
+Attribute_Label,Attribute_Definition,Attribute_Definition_Source,Attribute_Domain
+OBJECTID_1,Internal feature number.,Esri,Sequential unique whole numbers that are automatically generated.
+OBJECTID,,,
+stop_name,,,
+Rider_On,,,
+Rider_Off,,,
+Rider_Tota,,,
+Stop_Rider,,,
+Routes_Ser,,,
+Distributi,,,
+Mode,,,
+Shelter,,,
+County,,,
+stop_id,,,
+Shape,Feature geometry.,Esri,Coordinates defining the features.

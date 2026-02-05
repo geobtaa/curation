@@ -1,0 +1,16 @@
+Attribute_Label,Attribute_Definition,Attribute_Definition_Source,Attribute_Domain
+Shape_Length,Length of feature in internal units.,Esri,Positive real numbers that are automatically generated.
+OBJECTID,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+Shape,Feature geometry.,ESRI,Coordinates defining the features.
+SHAPE,Feature geometry.,ESRI,Coordinates defining the features.
+TAG,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+TYPE,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+SUBTYPE,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+Shape_Leng,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+SubTypeCod,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+SYMBOL,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+LINE,,,
+created_user,,,
+created_date,,,
+last_edited_user,,,
+last_edited_date,Length of feature in internal units.,Esri,Positive real numbers that are automatically generated.

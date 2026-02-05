@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+<idinfo>
+<citation>
+<citeinfo>
+<title>bus_route</title>
+<geoform>vector digital data</geoform>
+</citeinfo>
+</citation>
+<descript>
+<abstract>This data represents the locations of MTA bus routes within the City of Baltimore as of 2022. For current MTA bus routes data, please visit the State of Maryland's iMAP open data portal: https://data.imap.maryland.gov/datasets/maryland::maryland-transit-mta-bus-lines-1/about</abstract>
+<purpose>This data represents the locations of MTA bus routes within the City of Baltimore as of 2022. </purpose>
+</descript>
+<spdom>
+<bounding>
+<westbc>-76.888785</westbc>
+<eastbc>-76.091257</eastbc>
+<northbc>39.582714</northbc>
+<southbc>38.975778</southbc>
+</bounding>
+</spdom>
+<keywords>
+<theme>
+<themekt>None</themekt>
+<themekey>Bus Route</themekey>
+<themekey>Routes</themekey>
+<themekey>Bus</themekey>
+<themekey>Transportation</themekey>
+<themekey>DOT</themekey>
+<themekey>Geographic</themekey>
+<themekey>Transit</themekey>
+<themekey>Maryland Transit Authority</themekey>
+<themekey>MTA</themekey>
+<themekey>Public Transportation</themekey>
+</theme>
+</keywords>
+<accconst>None</accconst>
+<useconst>None</useconst>
+<datacred>State of Maryland, Maryland Transit Authority (MTA), City of Baltimore</datacred>
+<native>Esri ArcGIS 13.5.2.57366</native>
+</idinfo>
+<spdoinfo>
+<direct>Vector</direct>
+<ptvctinf>
+<sdtsterm>
+<sdtstype>String</sdtstype>
+<ptvctcnt>0</ptvctcnt>
+</sdtsterm>
+</ptvctinf>
+</spdoinfo>
+<eainfo>
+<detailed>
+<enttyp>
+<enttypl>bus_route</enttypl>
+</enttyp>
+<attr>
+<attrlabl>OBJECTID_1</attrlabl>
+<attrdef>Internal feature number.</attrdef>
+<attrdefs>ESRI</attrdefs>
+<attrdomv>
+<udom>Sequential unique whole numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>OBJECTID</attrlabl>
+<attrdef>Internal feature number.</attrdef>
+<attrdefs>ESRI</attrdefs>
+<attrdomv>
+<udom>Sequential unique whole numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>Route_Numb</attrlabl>
+</attr>
+<attr>
+<attrlabl>Shape</attrlabl>
+<attrdef>Feature geometry.</attrdef>
+<attrdefs>ESRI</attrdefs>
+<attrdomv>
+<udom>Coordinates defining the features.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>Route_Name</attrlabl>
+<attrdef>Name of Route</attrdef>
+</attr>
+<attr>
+<attrlabl>Route_Type</attrlabl>
+<attrdef>Transit Mode</attrdef>
+</attr>
+<attr>
+<attrlabl>Shape_Leng</attrlabl>
+</attr>
+<attr>
+<attrlabl>Dist_Polic</attrlabl>
+</attr>
+<attr>
+<attrlabl>County_FIP</attrlabl>
+</attr>
+<attr>
+<attrlabl>Municipal_</attrlabl>
+</attr>
+<attr>
+<attrlabl>Agency</attrlabl>
+<attrdef>Government Agency that is delivering the service.</attrdef>
+</attr>
+<attr>
+<attrlabl>created_user</attrlabl>
+</attr>
+<attr>
+<attrlabl>created_date</attrlabl>
+</attr>
+<attr>
+<attrlabl>last_edited_user</attrlabl>
+</attr>
+<attr>
+<attrlabl>last_edited_date</attrlabl>
+</attr>
+<attr>
+<attrlabl>Shape_Length</attrlabl>
+<attrdef>Length of feature in internal units.</attrdef>
+<attrdefs>Esri</attrdefs>
+<attrdomv>
+<udom>Positive real numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+</detailed>
+</eainfo>
+<distinfo>
+<distliab>See access and use constraints information.</distliab>
+<stdorder>
+<digform>
+<digtinfo>
+<formname>File Geodatabase Feature Class</formname>
+</digtinfo>
+<digtopt>
+<onlinopt>
+</onlinopt>
+</digtopt>
+</digform>
+</stdorder>
+</distinfo>
+<metainfo>
+<metd>20260121</metd>
+<metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+<metstdv>FGDC-STD-001-1998</metstdv>
+<mettc>local time</mettc>
+</metainfo>
+</metadata>

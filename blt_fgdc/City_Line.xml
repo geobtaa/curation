@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+<idinfo>
+<citation>
+<citeinfo>
+<title>City_Line</title>
+</citeinfo>
+</citation>
+<descript>
+<purpose>This dataset represents the Baltimore City administrative boundaries or City limit.</purpose>
+</descript>
+<keywords>
+<theme>
+<themekt>None</themekt>
+<themekey>City Government</themekey>
+<themekey>Boundary</themekey>
+<themekey>Jurisdiction</themekey>
+<themekey>Administration</themekey>
+<themekey>Geographic</themekey>
+<themekey>City Limit</themekey>
+</theme>
+</keywords>
+<accconst>None</accconst>
+<useconst>None</useconst>
+<datacred>City of Baltimore</datacred>
+</idinfo>
+<metainfo>
+<metd>20260120</metd>
+<metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+<metstdv>FGDC-STD-001-1998</metstdv>
+<mettc>local time</mettc>
+</metainfo>
+</metadata>

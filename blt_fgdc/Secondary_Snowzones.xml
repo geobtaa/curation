@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+<idinfo>
+<citation>
+<citeinfo>
+<title>Secondary_Snowzones</title>
+<geoform>vector digital data</geoform>
+</citeinfo>
+</citation>
+<descript>
+<abstract>This file shows the secondary snow removal zones that are used in the City's snow removal operations.</abstract>
+<purpose>To map/track the removal of snow in the City's secondary snow removal areas.</purpose>
+</descript>
+<keywords>
+<theme>
+<themekt>None</themekt>
+<themekey>Boundary</themekey>
+<themekey>Snow</themekey>
+<themekey>DOT</themekey>
+</theme>
+</keywords>
+<accconst>None</accconst>
+<useconst>None</useconst>
+<datacred>City of Baltimore, Department of Transportation (DOT)</datacred>
+<native>Esri ArcGIS 13.5.2.57366</native>
+</idinfo>
+<spdoinfo>
+<direct>Vector</direct>
+<ptvctinf>
+<sdtsterm>
+<sdtstype>GT-polygon composed of chains</sdtstype>
+<ptvctcnt>0</ptvctcnt>
+</sdtsterm>
+</ptvctinf>
+</spdoinfo>
+<eainfo>
+<detailed>
+<enttyp>
+<enttypl>Secondary_Snowzones</enttypl>
+</enttyp>
+<attr>
+<attrlabl>Shape</attrlabl>
+<attrdef>Feature geometry.</attrdef>
+<attrdefs>ESRI</attrdefs>
+<attrdomv>
+<udom>Coordinates defining the features.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>ZONE_NO</attrlabl>
+</attr>
+<attr>
+<attrlabl>AREA_NO</attrlabl>
+</attr>
+<attr>
+<attrlabl>ISSUE_NO</attrlabl>
+</attr>
+<attr>
+<attrlabl>AREA_</attrlabl>
+</attr>
+<attr>
+<attrlabl>PERIMETER</attrlabl>
+</attr>
+<attr>
+<attrlabl>ACRES</attrlabl>
+</attr>
+<attr>
+<attrlabl>Inspected</attrlabl>
+</attr>
+<attr>
+<attrlabl>AGENCY</attrlabl>
+</attr>
+<attr>
+<attrlabl>YARD_NAME</attrlabl>
+</attr>
+<attr>
+<attrlabl>Y_ADDRESS</attrlabl>
+</attr>
+<attr>
+<attrlabl>OBJECTID</attrlabl>
+<attrdef>Internal feature number.</attrdef>
+<attrdefs>ESRI</attrdefs>
+<attrdomv>
+<udom>Sequential unique whole numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>RTID</attrlabl>
+</attr>
+<attr>
+<attrlabl>Y_PHONE</attrlabl>
+</attr>
+<attr>
+<attrlabl>URL</attrlabl>
+</attr>
+<attr>
+<attrlabl>PASS</attrlabl>
+</attr>
+<attr>
+<attrlabl>CMPNY</attrlabl>
+</attr>
+<attr>
+<attrlabl>CNTCT1</attrlabl>
+</attr>
+<attr>
+<attrlabl>CNTCT2</attrlabl>
+</attr>
+<attr>
+<attrlabl>CNTCT3</attrlabl>
+</attr>
+<attr>
+<attrlabl>CNTCT4</attrlabl>
+</attr>
+<attr>
+<attrlabl>Shape_Length</attrlabl>
+<attrdef>Length of feature in internal units.</attrdef>
+<attrdefs>Esri</attrdefs>
+<attrdomv>
+<udom>Positive real numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+<attr>
+<attrlabl>Shape_Area</attrlabl>
+<attrdef>Area of feature in internal units squared.</attrdef>
+<attrdefs>Esri</attrdefs>
+<attrdomv>
+<udom>Positive real numbers that are automatically generated.</udom>
+</attrdomv>
+</attr>
+</detailed>
+</eainfo>
+<distinfo>
+<distliab>See access and use constraints information.</distliab>
+<stdorder>
+<digform>
+<digtinfo>
+<formname>SDE Feature Class</formname>
+<transize>0.363</transize>
+</digtinfo>
+<digtopt>
+<onlinopt>
+</onlinopt>
+</digtopt>
+</digform>
+</stdorder>
+</distinfo>
+<metainfo>
+<metd>20260121</metd>
+<metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+<metstdv>FGDC-STD-001-1998</metstdv>
+<mettc>local time</mettc>
+</metainfo>
+</metadata>

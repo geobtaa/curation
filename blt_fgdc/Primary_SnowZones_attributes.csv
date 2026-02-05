@@ -1,0 +1,19 @@
+Attribute_Label,Attribute_Definition,Attribute_Definition_Source,Attribute_Domain
+Shape,Feature geometry.,ESRI,Coordinates defining the features.
+ZONE_NO,,,
+AREA_NO,,,
+RTID,,,
+YARD_ID,,,
+INSP_LINKP,,,
+INSP_LINKS,,,
+OBJECTID,Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.
+Zone_,,,
+AGENCY,,,
+YARD_NAME,,,
+Y_ADDRESS,,,
+Y_PHONE,,,
+GlobalID,,,
+URL,,,
+PASS,,,
+Shape_Length,Length of feature in internal units.,Esri,Positive real numbers that are automatically generated.
+Shape_Area,Area of feature in internal units squared.,Esri,Positive real numbers that are automatically generated.
