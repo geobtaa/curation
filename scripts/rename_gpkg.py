@@ -191,23 +191,57 @@ def main() -> None:
         gpkg_dir = None
     else:
         gpkg_lookup = None
-        gpkg_dir = Path("./geopackages")  # change this if you want to use a directory
+        gpkg_dir = Path("output/gpkg")  # change this if you want to use a directory
 
-    with csv_path.open(newline="", encoding="utf-8") as f:
+    processed = 0
+    skipped = 0
+    failed = 0
+
+    with csv_path.open(newline="", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
-        for row in reader:
-            old_base = row["old_name"].strip()
-            new_base = row["new_name"].strip()
+        if not reader.fieldnames:
+            raise ValueError(f"CSV has no header row: {csv_path.resolve()}")
 
-            if gpkg_lookup is None:
-                gpkg_path = gpkg_dir / f"{old_base}.gpkg"
-            else:
-                gpkg_path = gpkg_lookup.get(old_base)
-                if gpkg_path is None:
-                    raise FileNotFoundError(
-                        f"No gpkg path provided for old_name '{old_base}'"
-                    )
-            process_one(gpkg_path, new_base, make_backup=True)
+        normalized_headers = [(name or "").strip().lower() for name in reader.fieldnames]
+        missing = [name for name in ("old_name", "new_name") if name not in normalized_headers]
+        if missing:
+            raise KeyError(
+                "Missing required CSV columns "
+                f"{missing}. Found headers: {reader.fieldnames} in {csv_path.resolve()}"
+            )
+
+        for row in reader:
+            row_normalized = {
+                (key or "").strip().lower(): (value or "")
+                for key, value in row.items()
+            }
+            old_base = row_normalized["old_name"].strip()
+            new_base = row_normalized["new_name"].strip()
+
+            try:
+                if gpkg_lookup is None:
+                    gpkg_path = gpkg_dir / f"{old_base}.gpkg"
+                    already_renamed_path = gpkg_dir / f"{new_base}.gpkg"
+                    if not gpkg_path.exists() and already_renamed_path.exists():
+                        print(f"SKIP already renamed: {old_base} -> {new_base}")
+                        skipped += 1
+                        continue
+                else:
+                    gpkg_path = gpkg_lookup.get(old_base)
+                    if gpkg_path is None:
+                        raise FileNotFoundError(
+                            f"No gpkg path provided for old_name '{old_base}'"
+                        )
+
+                process_one(gpkg_path, new_base, make_backup=True)
+                processed += 1
+            except Exception as exc:
+                print(f"ERROR: {old_base} -> {new_base}: {exc}")
+                failed += 1
+
+    print(f"Summary: processed={processed} skipped={skipped} failed={failed}")
+    if failed:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

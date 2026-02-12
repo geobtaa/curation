@@ -1,0 +1,9 @@
+name,type,width,precision,nullable,default,domain,alias,description,definition_source,metadata_domains
+LITERAIL_,Real,0,0,True,,,,,,
+LITERAIL_I,Real,0,0,True,,,,,,
+URL,String,100,0,True,,,,,,
+created_user,String,255,0,True,,,,,,
+created_date,DateTime,0,0,True,,,,,,
+last_edited_user,String,255,0,True,,,,,,
+last_edited_date,DateTime,0,0,True,,,,,,
+Shape_Length,Real,0,0,True,FILEGEODATABASE_SHAPE_LENGTH,,,,,

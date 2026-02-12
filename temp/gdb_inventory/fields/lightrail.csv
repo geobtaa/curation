@@ -1,0 +1,9 @@
+friendlier_id,field_name,field_type,values,definition,definition_source,domain_description,parent_field_name,position
+b1g_8Yb9gYL8QWYl,LITERAIL_,Real,,LITERAIL_I,,,,
+b1g_8Yb9gYL8QWYl,LITERAIL_I,Real,,OBJECTID. Length of feature in internal units.,ESRI,Positive real numbers that are automatically generated.,,
+b1g_8Yb9gYL8QWYl,URL,String,,,,,,
+b1g_8Yb9gYL8QWYl,created_user,String,,,,,,
+b1g_8Yb9gYL8QWYl,created_date,DateTime,,,,,,
+b1g_8Yb9gYL8QWYl,last_edited_user,String,,,,,,
+b1g_8Yb9gYL8QWYl,last_edited_date,DateTime,,Length of feature in internal units.,Esri,Positive real numbers that are automatically generated.,,
+b1g_8Yb9gYL8QWYl,Shape_Length,Real,,Length of feature in internal units.,Esri,Positive real numbers that are automatically generated.,,

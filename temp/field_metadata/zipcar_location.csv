@@ -1,0 +1,10 @@
+name,type,width,precision,nullable,default,domain,alias,description,definition_source,metadata_domains
+Id,Integer,0,0,True,,,,,,
+location,String,50,0,True,,,,,,
+vehicles,Integer,0,0,True,,,,,,
+date_added,DateTime,0,0,True,,,,,,
+URL,String,100,0,True,,,,,,
+created_user,String,255,0,True,,,,,,
+created_date,DateTime,0,0,True,,,,,,
+last_edited_user,String,255,0,True,,,,,,
+last_edited_date,DateTime,0,0,True,,,,,,

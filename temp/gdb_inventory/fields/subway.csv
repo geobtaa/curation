@@ -1,0 +1,9 @@
+friendlier_id,field_name,field_type,values,definition,definition_source,domain_description,parent_field_name,position
+b1g_HakV2hDpNXiH,SUBWAY_,Real,,SUBWAY_ID,,,,
+b1g_HakV2hDpNXiH,SUBWAY_ID,Real,,OBJECTID. Length of feature in internal units.,ESRI,Positive real numbers that are automatically generated.,,
+b1g_HakV2hDpNXiH,URL,String,,,,,,
+b1g_HakV2hDpNXiH,created_user,String,,,,,,
+b1g_HakV2hDpNXiH,created_date,DateTime,,,,,,
+b1g_HakV2hDpNXiH,last_edited_user,String,,,,,,
+b1g_HakV2hDpNXiH,last_edited_date,DateTime,,Length of feature in internal units.,Esri,Positive real numbers that are automatically generated.,,
+b1g_HakV2hDpNXiH,Shape_Length,Real,,Length of feature in internal units.,Esri,Positive real numbers that are automatically generated.,,

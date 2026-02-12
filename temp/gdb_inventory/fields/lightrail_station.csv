@@ -1,0 +1,11 @@
+friendlier_id,field_name,field_type,values,definition,definition_source,domain_description,parent_field_name,position
+b1g_35AMPCAWFk55,LRAILSTA_,Real,,LRAILSTA_I,,,,
+b1g_35AMPCAWFk55,LRAILSTA_I,Real,,NAME,,,,
+b1g_35AMPCAWFk55,NAME,String,,OBJECTID. Internal feature number.,Esri,Sequential unique whole numbers that are automatically generated.,,
+b1g_35AMPCAWFk55,MTA_BUSES,String,,URL. Internal feature number.,ESRI,Sequential unique whole numbers that are automatically generated.,,
+b1g_35AMPCAWFk55,SOURCE,String,,,,,,
+b1g_35AMPCAWFk55,URL,String,,created_user,,,,
+b1g_35AMPCAWFk55,created_user,String,,created_date,,,,
+b1g_35AMPCAWFk55,created_date,DateTime,,last_edited_user,,,,
+b1g_35AMPCAWFk55,last_edited_user,String,,last_edited_date,,,,
+b1g_35AMPCAWFk55,last_edited_date,DateTime,,SOURCE,,,,

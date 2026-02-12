@@ -1,0 +1,10 @@
+friendlier_id,field_name,field_type,values,definition,definition_source,domain_description,parent_field_name,position
+b1g_WchDyrtF5G0R,Id,Integer,,,,,,
+b1g_WchDyrtF5G0R,location,String,,,,,,
+b1g_WchDyrtF5G0R,vehicles,Integer,,,,,,
+b1g_WchDyrtF5G0R,date_added,DateTime,,,,,,
+b1g_WchDyrtF5G0R,URL,String,,,,,,
+b1g_WchDyrtF5G0R,created_user,String,,,,,,
+b1g_WchDyrtF5G0R,created_date,DateTime,,,,,,
+b1g_WchDyrtF5G0R,last_edited_user,String,,,,,,
+b1g_WchDyrtF5G0R,last_edited_date,DateTime,,,,,,

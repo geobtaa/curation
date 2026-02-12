@@ -1,0 +1,13 @@
+friendlier_id,field_name,field_type,values,definition,definition_source,domain_description,parent_field_name,position
+b1g_sSYISk5HPQHH,OBJECTID,Integer,,,,,,
+b1g_sSYISk5HPQHH,stop_name,String,,,,,,
+b1g_sSYISk5HPQHH,Rider_On,Integer,,,,,,
+b1g_sSYISk5HPQHH,Rider_Off,Integer,,,,,,
+b1g_sSYISk5HPQHH,Rider_Tota,Integer,,,,,,
+b1g_sSYISk5HPQHH,Stop_Rider,Integer,,,,,,
+b1g_sSYISk5HPQHH,Routes_Ser,String,,,,,,
+b1g_sSYISk5HPQHH,Distributi,String,,,,,,
+b1g_sSYISk5HPQHH,Mode,String,,,,,,
+b1g_sSYISk5HPQHH,Shelter,String,,,,,,
+b1g_sSYISk5HPQHH,County,String,,,,,,
+b1g_sSYISk5HPQHH,stop_id,String,,,,,,

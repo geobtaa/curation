@@ -1,0 +1,13 @@
+name,type,width,precision,nullable,default,domain,alias,description,definition_source,metadata_domains
+OBJECTID,Integer,0,0,True,,,,,,
+stop_name,String,80,0,True,,,,,,
+Rider_On,Integer,0,0,True,,,,,,
+Rider_Off,Integer,0,0,True,,,,,,
+Rider_Tota,Integer,0,0,True,,,,,,
+Stop_Rider,Integer,0,0,True,,,,,,
+Routes_Ser,String,80,0,True,,,,,,
+Distributi,String,80,0,True,,,,,,
+Mode,String,80,0,True,,,,,,
+Shelter,String,80,0,True,,,,,,
+County,String,80,0,True,,,,,,
+stop_id,String,80,0,True,,,,,,

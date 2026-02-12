@@ -1,0 +1,9 @@
+friendlier_id,field_name,field_type,values,definition,definition_source,domain_description,parent_field_name,position
+b1g_mTUMVP7xA2cF,OBJECTID_1,Integer,,OBJECTID. Internal feature number.,Esri,Sequential unique whole numbers that are automatically generated.,,
+b1g_mTUMVP7xA2cF,Zoning,String,,,,,,
+b1g_mTUMVP7xA2cF,overlay,String,,,,,,
+b1g_mTUMVP7xA2cF,Label,String,,,,,,
+b1g_mTUMVP7xA2cF,Shape_Leng,Real,,,,,,
+b1g_mTUMVP7xA2cF,URL,String,,,,,,
+b1g_mTUMVP7xA2cF,Shape_Length,Real,,Length of feature in internal units.,Esri,Positive real numbers that are automatically generated.,,
+b1g_mTUMVP7xA2cF,Shape_Area,Real,,Area of feature in internal units squared.,Esri,Positive real numbers that are automatically generated.,,

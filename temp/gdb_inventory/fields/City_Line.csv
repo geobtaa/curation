@@ -1,0 +1,6 @@
+friendlier_id,field_name,field_type,values,definition,definition_source,domain_description,parent_field_name,position
+b1g_hVC7k3BNljau,id,Integer,,,,,,
+b1g_hVC7k3BNljau,perimeter,Real,,,,,,
+b1g_hVC7k3BNljau,globalid,String,,,,,,
+b1g_hVC7k3BNljau,GlobalID_2,String,,,,,,
+b1g_hVC7k3BNljau,Shape_Length,Real,,,,,,

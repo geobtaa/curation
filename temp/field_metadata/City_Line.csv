@@ -1,0 +1,6 @@
+name,type,width,precision,nullable,default,domain,alias,description,definition_source,metadata_domains
+id,Integer,0,0,True,,,,,,
+perimeter,Real,0,0,True,,,,,,
+globalid,String,38,0,True,,,,,,
+GlobalID_2,String,0,0,False,,,,,,
+Shape_Length,Real,0,0,True,FILEGEODATABASE_SHAPE_LENGTH,,,,,

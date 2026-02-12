@@ -1,0 +1,9 @@
+name,type,width,precision,nullable,default,domain,alias,description,definition_source,metadata_domains
+OBJECTID_1,Integer,0,0,True,,,OBJECTID,,,
+Zoning,String,15,0,True,,,,,,
+overlay,String,5,0,True,,,,,,
+Label,String,15,0,True,,,,,,
+Shape_Leng,Real,0,0,True,,,,,,
+URL,String,150,0,True,,,,,,
+Shape_Length,Real,0,0,True,FILEGEODATABASE_SHAPE_LENGTH,,,,,
+Shape_Area,Real,0,0,True,FILEGEODATABASE_SHAPE_AREA,,,,,

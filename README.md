@@ -36,3 +36,4 @@ Python GDAL bindings must match the system GDAL version. If `pip`/`uv` fails to 
 - `scripts/extract_metadata.py`
 - `scripts/get_thumbs.py`
 - `scripts/create_pm_tiles.py`
+- `scripts/export_gdb_feature_classes_to_gpkg.py`
