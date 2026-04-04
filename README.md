@@ -37,3 +37,12 @@ Python GDAL bindings must match the system GDAL version. If `pip`/`uv` fails to 
 - `scripts/get_thumbs.py`
 - `scripts/create_pm_tiles.py`
 - `scripts/export_gdb_feature_classes_to_gpkg.py`
+- `scripts/merge_csvs.py`
+
+Example:
+
+```sh
+python scripts/merge_csvs.py people.csv scores.csv id -o combined.csv
+```
+
+The merged output includes `match_status` and `unmatched_source` columns so rows that only exist in one CSV are still written to the combined file.
