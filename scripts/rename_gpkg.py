@@ -178,7 +178,7 @@ def build_gpkg_lookup(gpkg_paths: list[Path]) -> dict[str, Path]:
 
 
 def main() -> None:
-    csv_path = Path("rename_map_2.csv")  # change this if needed
+    csv_path = Path("rename_map_3.csv")  # change this if needed
 
     # Optional: manually list full paths to gpkg files (useful if they live in different folders)
     gpkg_paths: list[Path] = [
@@ -191,7 +191,7 @@ def main() -> None:
         gpkg_dir = None
     else:
         gpkg_lookup = None
-        gpkg_dir = Path("30g-01/30g-01-geopackages")  # change this if you want to use a directory
+        gpkg_dir = Path("30g-02/data")  # change this if you want to use a directory
 
     processed = 0
     skipped = 0

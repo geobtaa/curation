@@ -6,8 +6,8 @@ import os
 import shutil
 import subprocess
 
-INPUT_DIR = "gpkg"
-OUTPUT_DIR = "pmtiles"
+INPUT_DIR = "30g-02/data"
+OUTPUT_DIR = "30g-02/pmtiles"
 MIN_ZOOM = 5
 MAX_ZOOM = 12
 TARGET_SRS = "EPSG:4326"

@@ -23,7 +23,7 @@
   <links>
     <link name="BTAA Geoportal Page" description="" format="" mimeType="" size="" url="https://geo.btaa.org/catalog/{ID}}" type="Information"/>
   </links>
-  <history>{Provenance}
+  <history>{Provenance}</history>
   <dates>
     <date value="{now}" type="Created"/>
     <date value="{now}" type="Published"/>

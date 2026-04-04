@@ -28,7 +28,7 @@ def iter_geopackages(input_dir: Path, *, recursive: bool) -> list[Path]:
 def build_archive_path(gpkg_path: Path, input_dir: Path, output_dir: Path) -> Path:
     relative_parent = gpkg_path.parent.relative_to(input_dir)
     archive_dir = output_dir / relative_parent
-    archive_name = f"{gpkg_path.stem}.zip"
+    archive_name = f"{gpkg_path.name}.zip"
     return archive_dir / archive_name
 
 
@@ -97,7 +97,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        help="Directory for the .zip files. Defaults to the input directory.",
+        help="Directory for the .gpkg.zip files. Defaults to the input directory.",
     )
     parser.add_argument(
         "--recursive",
@@ -107,7 +107,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--overwrite",
         action="store_true",
-        help="Replace existing .zip files instead of skipping them.",
+        help="Replace existing .gpkg.zip files instead of skipping them.",
     )
     parser.add_argument(
         "--delete-originals",

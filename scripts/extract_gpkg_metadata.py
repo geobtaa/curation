@@ -11,8 +11,8 @@ import pandas as pd
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
-INPUT_DIR = "30g-01-geopackages"
-OUTPUT_CSV = "gpkg_metadata.csv"
+INPUT_DIR = "30g-02/data"
+OUTPUT_CSV = "30g-02_gpkg_metadata.csv"
 DECIMAL_PLACES = 4
 
 

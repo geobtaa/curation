@@ -49,6 +49,11 @@ def build_parser() -> argparse.ArgumentParser:
         default="unmatched_source",
         help="Name of the output column naming the CSV for unmatched rows. Default: unmatched_source.",
     )
+    parser.add_argument(
+        "--ignore-key-case",
+        action="store_true",
+        help="Match join keys case-insensitively.",
+    )
     return parser
 
 
@@ -74,6 +79,7 @@ def main() -> int:
         right_label=args.right_label,
         status_column=args.status_column,
         source_column=args.source_column,
+        ignore_key_case=args.ignore_key_case,
     )
     print(f"Wrote {row_count} rows to {output_path}")
     return 0

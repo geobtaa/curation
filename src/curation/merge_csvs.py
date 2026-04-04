@@ -22,6 +22,10 @@ def _read_csv_rows(path: str | Path) -> tuple[list[str], list[dict[str, str]]]:
     return list(reader.fieldnames), rows
 
 
+def _normalize_key(value: str, *, ignore_case: bool) -> str:
+    return value.casefold() if ignore_case else value
+
+
 def _build_column_maps(
     left_headers: list[str],
     right_headers: list[str],
@@ -80,10 +84,15 @@ def _build_column_maps(
     return left_map, right_map, output_columns
 
 
-def _index_rows(rows: list[dict[str, str]], key_name: str) -> dict[str, list[dict[str, str]]]:
+def _index_rows(
+    rows: list[dict[str, str]],
+    key_name: str,
+    *,
+    ignore_case: bool,
+) -> dict[str, list[dict[str, str]]]:
     indexed: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in rows:
-        indexed[row.get(key_name, "")].append(row)
+        indexed[_normalize_key(row.get(key_name, ""), ignore_case=ignore_case)].append(row)
     return indexed
 
 
@@ -139,6 +148,7 @@ def merge_csvs(
     right_label: str | None = None,
     status_column: str = "match_status",
     source_column: str = "unmatched_source",
+    ignore_key_case: bool = False,
 ) -> int:
     left_file = Path(left_path)
     right_file = Path(right_path)
@@ -167,70 +177,79 @@ def merge_csvs(
         source_column=source_column,
     )
 
-    left_index = _index_rows(left_rows, left_key)
-    right_index = _index_rows(right_rows, right_key)
+    left_index = _index_rows(left_rows, left_key, ignore_case=ignore_key_case)
+    right_index = _index_rows(right_rows, right_key, ignore_case=ignore_key_case)
 
-    row_count = 0
+    merged_rows: list[dict[str, str]] = []
+    nonblank_columns: set[str] = set()
+
+    seen_left_keys: set[str] = set()
+    for left_row in left_rows:
+        key = _normalize_key(left_row.get(left_key, ""), ignore_case=ignore_key_case)
+        if key in seen_left_keys:
+            continue
+        seen_left_keys.add(key)
+
+        left_group = left_index[key]
+        right_group = right_index.get(key, [])
+        pairs = product(left_group, right_group) if right_group else ((row, None) for row in left_group)
+
+        for current_left, current_right in pairs:
+            output_row = _build_output_row(
+                left_row=current_left,
+                right_row=current_right,
+                left_headers=left_headers,
+                right_headers=right_headers,
+                left_map=left_map,
+                right_map=right_map,
+                output_columns=output_columns,
+                left_key=left_key,
+                right_key=right_key,
+                status_column=status_column,
+                source_column=source_column,
+                left_label=left_label,
+                right_label=right_label,
+            )
+            merged_rows.append(output_row)
+            nonblank_columns.update(column for column, value in output_row.items() if value != "")
+
+    seen_right_keys: set[str] = set()
+    for right_row in right_rows:
+        key = _normalize_key(right_row.get(right_key, ""), ignore_case=ignore_key_case)
+        if key in seen_right_keys or key in left_index:
+            continue
+        seen_right_keys.add(key)
+
+        for current_right in right_index[key]:
+            output_row = _build_output_row(
+                left_row=None,
+                right_row=current_right,
+                left_headers=left_headers,
+                right_headers=right_headers,
+                left_map=left_map,
+                right_map=right_map,
+                output_columns=output_columns,
+                left_key=left_key,
+                right_key=right_key,
+                status_column=status_column,
+                source_column=source_column,
+                left_label=left_label,
+                right_label=right_label,
+            )
+            merged_rows.append(output_row)
+            nonblank_columns.update(column for column, value in output_row.items() if value != "")
+
+    final_columns = [column for column in output_columns if column in nonblank_columns]
+
     with output_file.open("w", newline="", encoding="utf-8") as outfile:
-        writer = csv.DictWriter(outfile, fieldnames=output_columns)
+        writer = csv.DictWriter(outfile, fieldnames=final_columns)
         writer.writeheader()
+        writer.writerows(
+            {column: row[column] for column in final_columns}
+            for row in merged_rows
+        )
 
-        seen_left_keys: set[str] = set()
-        for left_row in left_rows:
-            key = left_row.get(left_key, "")
-            if key in seen_left_keys:
-                continue
-            seen_left_keys.add(key)
+    return len(merged_rows)
 
-            left_group = left_index[key]
-            right_group = right_index.get(key, [])
-            pairs = product(left_group, right_group) if right_group else ((row, None) for row in left_group)
 
-            for current_left, current_right in pairs:
-                writer.writerow(
-                    _build_output_row(
-                        left_row=current_left,
-                        right_row=current_right,
-                        left_headers=left_headers,
-                        right_headers=right_headers,
-                        left_map=left_map,
-                        right_map=right_map,
-                        output_columns=output_columns,
-                        left_key=left_key,
-                        right_key=right_key,
-                        status_column=status_column,
-                        source_column=source_column,
-                        left_label=left_label,
-                        right_label=right_label,
-                    )
-                )
-                row_count += 1
 
-        seen_right_keys: set[str] = set()
-        for right_row in right_rows:
-            key = right_row.get(right_key, "")
-            if key in seen_right_keys or key in left_index:
-                continue
-            seen_right_keys.add(key)
-
-            for current_right in right_index[key]:
-                writer.writerow(
-                    _build_output_row(
-                        left_row=None,
-                        right_row=current_right,
-                        left_headers=left_headers,
-                        right_headers=right_headers,
-                        left_map=left_map,
-                        right_map=right_map,
-                        output_columns=output_columns,
-                        left_key=left_key,
-                        right_key=right_key,
-                        status_column=status_column,
-                        source_column=source_column,
-                        left_label=left_label,
-                        right_label=right_label,
-                    )
-                )
-                row_count += 1
-
-    return row_count

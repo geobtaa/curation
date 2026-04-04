@@ -26,7 +26,7 @@ OUTPUT_COLUMNS = [
 ]
 
 DEFAULT_INPUT_CSV = "restServiceFields.csv"
-DEFAULT_OUTPUT_DIR = "30g-01/data_dictionaries"
+DEFAULT_OUTPUT_DIR = "30g-02/data_dictionaries"
 
 
 def build_json_url(service_url: str) -> str:

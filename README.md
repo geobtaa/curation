@@ -46,3 +46,4 @@ python scripts/merge_csvs.py people.csv scores.csv id -o combined.csv
 ```
 
 The merged output includes `match_status` and `unmatched_source` columns so rows that only exist in one CSV are still written to the combined file.
+Use `--ignore-key-case` when values like `ABC123` and `abc123` should be treated as the same key. Columns that are blank in every output row are omitted automatically.
