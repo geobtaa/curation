@@ -6,8 +6,8 @@ import os
 
 import geopandas as gpd
 
-INPUT_DIR = "mpls2015"
-OUTPUT_DIR = "geopackages"
+INPUT_DIR = "30g-01"
+OUTPUT_DIR = "30g-01-geopackages"
 
 
 def convert_shapefile(shapefile_path: str, output_path: str) -> None:

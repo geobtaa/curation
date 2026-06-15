@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
+import sqlite3
 
 import geopandas as gpd
 import pandas as pd
@@ -18,7 +19,7 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 column_mapping = {
     "folder_name": "Folder Name",
     "filename": "File Name",
-    "crs": "Conforms To",
+    "crs": "Coordinate Reference System",
     "file_format": "Format",
     "spatial_resolution": "Spatial Resolution",
     "geometry_type": "Resource Type",
@@ -219,6 +220,57 @@ def count_vertices(geometry) -> int:
     return 0
 
 
+def sanitize_name(value: str) -> str:
+    """Return a filesystem-safe name fragment."""
+    return "".join(char if char.isalnum() or char in "._-" else "_" for char in value)
+
+
+def get_gpkg_layers(filepath: str) -> list[str]:
+    """Return the list of vector layers in a GeoPackage."""
+    try:
+        with sqlite3.connect(filepath) as conn:
+            rows = conn.execute(
+                """
+                SELECT table_name
+                FROM gpkg_contents
+                WHERE data_type = 'features'
+                AND table_name IS NOT NULL
+                """
+            ).fetchall()
+    except Exception as exc:
+        logging.error("Could not list layers for GeoPackage %s: %s", filepath, exc)
+        return []
+
+    return [table_name for (table_name,) in rows if table_name]
+
+
+def get_gpkg_layer_identifiers(filepath: str) -> dict[str, str]:
+    """Return GeoPackage table_name -> identifier values from gpkg_contents."""
+    try:
+        with sqlite3.connect(filepath) as conn:
+            rows = conn.execute(
+                """
+                SELECT table_name, identifier
+                FROM gpkg_contents
+                WHERE table_name IS NOT NULL
+                """
+            ).fetchall()
+    except Exception as exc:
+        logging.warning("Could not read gpkg_contents in %s: %s", filepath, exc)
+        return {}
+
+    return {
+        table_name: identifier
+        for table_name, identifier in rows
+        if table_name and identifier
+    }
+
+
+def build_gpkg_display_name(filename: str, layer_name: str) -> str:
+    """Return a readable label for a GeoPackage layer."""
+    return f"{filename}:{layer_name}"
+
+
 def process_vector(
     filepath: str,
     filename: str,
@@ -227,20 +279,24 @@ def process_vector(
     folder_size: float,
     metadata: dict,
     decimal_places: int,
+    layer_name: str | None = None,
+    display_name: str | None = None,
 ) -> None:
     global include_wkt
     try:
-        logging.info("Processing vector file %s", filename)
-        gdf = gpd.read_file(filepath)
+        source_name = display_name or filename
+        logging.info("Processing vector file %s", source_name)
+        read_kwargs = {"layer": layer_name} if layer_name is not None else {}
+        gdf = gpd.read_file(filepath, **read_kwargs)
 
         if gdf.crs is None:
             logging.warning(
                 "Dataset %s has no CRS. Spatial calculations may be inaccurate.",
-                filename,
+                source_name,
             )
             gdf.crs = "EPSG:26916"
             crs_uri = format_crs_uri(gdf.crs)
-            logging.info("Assigned CRS %s to dataset %s", gdf.crs, filename)
+            logging.info("Assigned CRS %s to dataset %s", gdf.crs, source_name)
         else:
             original_crs = gdf.crs.to_string()
             crs_uri = format_crs_uri(original_crs)
@@ -252,7 +308,7 @@ def process_vector(
             wkt_outline = ""
         geometry_type = process_geometry_type(gdf)
 
-        metadata["filename"].append(filename)
+        metadata["filename"].append(source_name)
         metadata["folder_name"].append(folder_name)
         metadata["crs"].append(crs_uri)
         metadata["file_format"].append(file_format)
@@ -262,8 +318,9 @@ def process_vector(
         metadata["folder_size"].append(f"{folder_size} MB")
         metadata["wkt_outline"].append(wkt_outline)
     except Exception as exc:
-        logging.error("Could not process vector file %s: %s", filename, exc)
-        append_empty_metadata(metadata, filename, folder_name, file_format, folder_size)
+        source_name = display_name or filename
+        logging.error("Could not process vector file %s: %s", source_name, exc)
+        append_empty_metadata(metadata, source_name, folder_name, file_format, folder_size)
 
 
 def process_raster(
@@ -390,15 +447,25 @@ def extract_metadata() -> None:
                     filepath, filename, folder_name, folder_size, metadata, decimal_places
                 )
             elif file_ext == ".gpkg":
-                metadata["filename"].append(filename)
-                metadata["folder_name"].append(folder_name)
-                metadata["crs"].append("")
-                metadata["file_format"].append("GeoPackage")
-                metadata["geometry_type"].append("")
-                metadata["bounding_box"].append("")
-                metadata["spatial_resolution"].append("")
-                metadata["folder_size"].append(f"{folder_size} MB")
-                metadata["wkt_outline"].append("")
+                layers = get_gpkg_layers(filepath)
+                if not layers:
+                    append_empty_metadata(
+                        metadata, filename, folder_name, "GeoPackage", folder_size
+                    )
+                    continue
+
+                for layer_name in layers:
+                    process_vector(
+                        filepath,
+                        filename,
+                        "GeoPackage",
+                        folder_name,
+                        folder_size,
+                        metadata,
+                        decimal_places,
+                        layer_name=layer_name,
+                        display_name=build_gpkg_display_name(filename, layer_name),
+                    )
 
     df = pd.DataFrame(metadata)
     df.rename(columns=column_mapping, inplace=True)
@@ -446,6 +513,41 @@ def extract_attribute_table_info(root_directory: str, output_dir: str) -> None:
                     )
                 except Exception as exc:
                     print(f"Could not read {filename}: {exc}")
+            elif file_ext == ".gpkg":
+                layer_identifiers = get_gpkg_layer_identifiers(filepath)
+                layers = get_gpkg_layers(filepath)
+
+                for layer_name in layers:
+                    try:
+                        gdf = gpd.read_file(filepath, layer=layer_name)
+                        friendlier_id = layer_identifiers.get(
+                            layer_name, build_gpkg_display_name(filename, layer_name)
+                        )
+                        field_info = []
+                        for column in gdf.columns:
+                            field_info.append(
+                                {
+                                    "friendlier_id": friendlier_id,
+                                    "field_name": column,
+                                    "field_type": str(gdf[column].dtype),
+                                    "values": "",
+                                    "definition": "",
+                                    "definition_source": "",
+                                }
+                            )
+
+                        field_df = pd.DataFrame(field_info)
+                        output_csv_name = (
+                            f"{os.path.splitext(filename)[0]}_{sanitize_name(layer_name)}_fields.csv"
+                        )
+                        output_csv_path = os.path.join(output_dir, output_csv_name)
+                        field_df.to_csv(output_csv_path, index=False)
+                        print(
+                            "Field information extracted for "
+                            f"{filename} layer {layer_name}. CSV saved to {output_csv_path}"
+                        )
+                    except Exception as exc:
+                        print(f"Could not read {filename} layer {layer_name}: {exc}")
 
 
 def main() -> None:
