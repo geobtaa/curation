@@ -136,6 +136,10 @@ def jpeg_output_type(metadata: dict[str, Any]) -> str:
     if not bands:
         raise RuntimeError("Source raster has no bands")
     for band in bands:
+        if band.get("type") == "Byte" and (
+            band.get("minimum") is None or band.get("maximum") is None
+        ):
+            continue
         minimum = band.get("minimum")
         maximum = band.get("maximum")
         if minimum is None or maximum is None or minimum < 0 or maximum > 255:
