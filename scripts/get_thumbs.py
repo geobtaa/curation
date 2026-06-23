@@ -82,8 +82,8 @@ def create_thumbnails_for_directory(
 
 
 def main() -> None:
-    data_directory = "30g-01/30g-01-geopackages"
-    thumbnail_directory = "30g-01/thumbnails"
+    data_directory = "mke-ubl"
+    thumbnail_directory = "mke-ubl/thumbnails"
     create_thumbnails_for_directory(data_directory, thumbnail_directory)
 
 

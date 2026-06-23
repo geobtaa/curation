@@ -24,8 +24,8 @@ OUTPUT_COLUMNS = [
     "position",
 ]
 
-INPUT_DIR = "30g-01/30g-01-geopackages"
-OUTPUT_DIR = "30g-01/data_dictionaries"
+INPUT_DIR = "mke-ubl"
+OUTPUT_DIR = "mke-ubl/data_dictionaries"
 
 
 def get_gpkg_identifier(filepath: str) -> str:
